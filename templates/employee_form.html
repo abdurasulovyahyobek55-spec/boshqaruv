@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{% if employee %}Xodimni tahrirlash{% else %}Yangi xodim{% endif %} — Boshqaruv Tizimi{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('index') }}"
+                class="link-accent text-decoration-none">Dashboard</a></li>
+        <li class="breadcrumb-item">
+            <a href="{{ url_for('school_detail', school_id=school['id']) }}" class="link-accent text-decoration-none">{{
+                school['name'] }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {% if employee %}Tahrirlash{% else %}Yangi xodim{% endif %}
+        </li>
+    </ol>
+</nav>
+
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card glass-card">
+            <div class="card-body p-4 p-md-5">
+                <h3 class="fw-800 mb-1 text-accent">
+                    <i class="bi bi-{% if employee %}pencil-square{% else %}person-plus{% endif %} me-2"></i>
+                    {% if employee %}Xodimni tahrirlash{% else %}Yangi xodim qo'shish{% endif %}
+                </h3>
+                <p class="text-body-secondary mb-4">
+                    <i class="bi bi-mortarboard me-1"></i> {{ school['name'] }}
+                </p>
+
+                <form method="POST" id="employeeForm">
+                    <div class="row g-3 mb-3">
+                        <div class="col-sm-6">
+                            <label for="first_name" class="form-label fw-600">Ism</label>
+                            <input type="text" class="form-control bg-transparent border-secondary" id="first_name"
+                                name="first_name" required placeholder="Masalan: Alisher"
+                                value="{{ employee['first_name'] if employee else '' }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="last_name" class="form-label fw-600">Familiya</label>
+                            <input type="text" class="form-control bg-transparent border-secondary" id="last_name"
+                                name="last_name" required placeholder="Masalan: Navoiy"
+                                value="{{ employee['last_name'] if employee else '' }}">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="position" class="form-label fw-600">Lavozim</label>
+                        <input type="text" class="form-control bg-transparent border-secondary" id="position"
+                            name="position" required placeholder="Masalan: Matematika o'qituvchisi"
+                            value="{{ employee['position'] if employee else '' }}">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="phone" class="form-label fw-600">
+                            <i class="bi bi-telephone me-1"></i> Telefon raqami
+                        </label>
+                        <input type="tel" class="form-control bg-transparent border-secondary" id="phone" name="phone"
+                            required placeholder="+998 XX XXX XX XX" maxlength="17"
+                            value="{{ employee['phone'] if employee else '+998 ' }}">
+                        <div class="form-text text-body-secondary">Format: +998 XX XXX XX XX</div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-accent btn-lg flex-grow-1">
+                            <i class="bi bi-check-lg me-1"></i>
+                            {% if employee %}Saqlash{% else %}Qo'shish{% endif %}
+                        </button>
+                        <a href="{{ url_for('school_detail', school_id=school['id']) }}"
+                            class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-x-lg me-1"></i> Bekor
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
