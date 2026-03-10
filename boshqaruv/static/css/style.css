@@ -1,0 +1,489 @@
+/* ─── Custom Properties ─────────────────────────────────────────── */
+:root {
+    --accent: #6c5ce7;
+    --accent-hover: #5a4bd1;
+    --accent-glow: rgba(108, 92, 231, 0.35);
+    --gradient-blue: linear-gradient(135deg, #0984e3 0%, #6c5ce7 100%);
+    --gradient-green: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+    --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #e17055 100%);
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────── */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background: #0f0f1a;
+    color: #e2e2e2;
+    transition: background 0.5s ease, color 0.4s ease;
+}
+
+/* ─── Theme: Gradient ───────────────────────────────────────────── */
+body.theme-gradient {
+    background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ─── Theme: Light ──────────────────────────────────────────────── */
+body.theme-light {
+    background: #f0f2f5;
+    color: #1a1a2e;
+}
+
+body.theme-light .glass-nav {
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .glass-nav .nav-link {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body.theme-light .glass-nav .nav-link:hover {
+    color: #000;
+    background: rgba(108, 92, 231, 0.1);
+}
+
+body.theme-light .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+body.theme-light .custom-table thead th {
+    background: rgba(108, 92, 231, 0.08);
+    color: rgba(0, 0, 0, 0.55);
+}
+
+body.theme-light .custom-table tbody td {
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+body.theme-light .table-row-hover:hover {
+    background: rgba(108, 92, 231, 0.04) !important;
+}
+
+body.theme-light .text-body-secondary {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+body.theme-light .form-control {
+    background: #fff !important;
+    border-color: #d0d0d0 !important;
+    color: #1a1a2e !important;
+}
+
+body.theme-light .breadcrumb-item+.breadcrumb-item::before {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+body.theme-light footer {
+    border-top-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.theme-light .alert {
+    color: #1a1a2e;
+}
+
+/* ─── Theme Switcher ────────────────────────────────────────────── */
+.theme-switcher {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.theme-light .theme-switcher {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    padding: 0;
+}
+
+.theme-btn:hover {
+    transform: scale(1.15);
+}
+
+.theme-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.theme-btn-dark {
+    background: #0f0f1a;
+}
+
+.theme-btn-gradient {
+    background: linear-gradient(135deg, #302b63, #24243e);
+}
+
+.theme-btn-light {
+    background: #f0f2f5;
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: #0f0f1a;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.text-accent {
+    color: var(--accent) !important;
+}
+
+.link-accent {
+    color: var(--accent) !important;
+    transition: color 0.2s;
+}
+
+.link-accent:hover {
+    color: var(--accent-hover) !important;
+}
+
+.bg-accent {
+    background-color: var(--accent) !important;
+}
+
+/* ─── Glass Nav ─────────────────────────────────────────────────── */
+.glass-nav {
+    background: rgba(15, 15, 26, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.glass-nav .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 1rem;
+    transition: all 0.25s ease;
+    font-weight: 500;
+}
+
+.glass-nav .nav-link:hover {
+    color: #fff;
+    background: rgba(108, 92, 231, 0.15);
+}
+
+.brand-text {
+    background: var(--gradient-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.3rem;
+    letter-spacing: -0.5px;
+}
+
+/* ─── Stat Cards ────────────────────────────────────────────────── */
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    color: #fff;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card-gradient-blue {
+    background: var(--gradient-blue);
+}
+
+.card-gradient-green {
+    background: var(--gradient-green);
+}
+
+.card-gradient-purple {
+    background: var(--gradient-purple);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.85;
+    line-height: 1;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.85;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ─── Glass Card ────────────────────────────────────────────────── */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow);
+}
+
+/* ─── Tables ────────────────────────────────────────────────────── */
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.custom-table thead th {
+    background: rgba(108, 92, 231, 0.12);
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 0.85rem 1rem;
+}
+
+.custom-table thead th:first-child {
+    border-top-left-radius: var(--radius-sm);
+}
+
+.custom-table thead th:last-child {
+    border-top-right-radius: var(--radius-sm);
+}
+
+.custom-table tbody td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    vertical-align: middle;
+}
+
+.table-row-hover {
+    transition: background 0.2s ease;
+}
+
+.table-row-hover:hover {
+    background: rgba(108, 92, 231, 0.06) !important;
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────── */
+.btn-accent {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px var(--accent-glow);
+    transition: all 0.25s ease;
+}
+
+.btn-accent:hover {
+    background: var(--accent-hover);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.btn-accent:active {
+    transform: translateY(0);
+}
+
+/* ─── Form Controls ─────────────────────────────────────────────── */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem var(--accent-glow);
+}
+
+/* ─── Alerts ────────────────────────────────────────────────────── */
+.alert {
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+}
+
+/* ─── Breadcrumbs ───────────────────────────────────────────────── */
+.breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ─── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 767.98px) {
+    .stat-card {
+        padding: 1.15rem;
+        gap: 1rem;
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .custom-table thead th {
+        font-size: 0.7rem;
+        padding: 0.65rem 0.5rem;
+    }
+
+    .custom-table tbody td {
+        padding: 0.65rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-group-sm>.btn {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.78rem;
+    }
+
+    h2,
+    h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .table-responsive {
+        font-size: 0.82rem;
+    }
+
+    .stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+}
+
+/* ─── Animations ────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+.stat-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.stat-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.card,
+.glass-card {
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(108, 92, 231, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 92, 231, 0.5);
+}
+
+/* ─── Delete form inline ────────────────────────────────────────── */
+.delete-form {
+    display: inline;
+}
+
+.delete-form .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
